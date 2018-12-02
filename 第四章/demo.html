@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据类型</title>
+    <script type="text/javascript" src="demo.js"></script>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    var box = '张波';
+    alert(typeof(box));
+</script>
+</html>
+<!--
+ECMAScript中有5中简单数据类型：Undefined、Null、Boolean、Number和String。还有一种更复杂数据类型--Object。
+ECMAScript不支持任何创建自定义类型的机制，所有值都成为以上6种数据类型之一。
+一、typeof操作符
+typeof操作符是用来检测变量的数据类型。对于值或变量使用typeof操作符会返回以下字符串。
+Undefined   未定义
+boolean     布尔值
+string      字符串
+number      数值
+object      对象或null
+function    函数
+typeof操作符可以操作变量，也可以操作字面量，虽然也可以这样使用：typeof(box)，但typeof是操作符而非内置函数。
+PS:函数在ECMAScript中是对象，不是一种数据类型。所以使用typeof来区分function和object是非常有必要的。
+二、Undefined类型
+Undefined类型只有一个值，即特殊的undefined。在使用var声明变量，但没有对其初始化时，这个变量的值是undefined。
+var box;
+alert(box);
+-->
