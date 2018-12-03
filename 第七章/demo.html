@@ -3,8 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <title>函数</title>
+    <script type="text/javascript" src="demo.js"></script>
 </head>
 <body>
 
 </body>
+<script type="text/javascript">
+    /*
+    //没有参数的函数
+    function box() {
+        alert('只有函数被调用，我才会被执行!');
+    }
+    //直接调用函数
+    box();
+
+    //带参数的函数
+    function box(name, age) {
+        alert('你的姓名:'+ name +',年龄:'+ age);
+    }
+    //调用函数并传参
+    box('张波', 18);
+
+    //没有参数的函数
+    function box() {
+        //通过return把函数的最终值返回
+        return '我被返回了!';
+    }
+    //调用函数会得到返回值，然后输出
+    alert(box());
+
+    //有参数的函数
+    function box(name, age) {
+        //通过return把函数的最终值返回
+        return '您的姓名:' + name + ',您的年龄:' + age;
+    }
+    //调用函数得到返回值，然后外面输出
+    alert(box('张波', 18));
+
+    //我们还可以把函数的返回值赋值给一个变量，然后通过变量进行操作。
+    function box(num1, num2) {
+        return num1 * num2;
+    }
+    //函数得到的返回值赋给变量
+    var num = box(10, 7.8);
+    alert(num);
+
+    function box(num) {
+        //满足条件，就返回num
+        if (num < 10) return num;
+        //返回之后，就不执行下面的语句
+        return 666;
+    }
+    alert(box(12));
+
+    function box() {
+        //得到每次参数的值
+        return arguments[0] + '/' + arguments[1];
+    }
+    //传递参数
+    alert(box(1, 2, 3, 4, 5, 6));
+
+    //获取参数的数量
+    function box() {
+        return arguments.length;
+    }
+    alert(box(1, 4, 7, 'r'));
+
+    function box() {
+        //如果没有参数就返回
+        var sum = 0;
+        if (arguments.length == 0) return sum;
+        for (var i = 0; i < arguments.length; i ++) {
+            sum += arguments[i];
+        }
+        //返回累加结果
+        return sum;
+    }
+    //调用函数
+    alert(box(1, 2, 3, 4));
+    */
+
+    //ECMAScript中的函数，没有像其它高级语言那种函数重载功能。
+    function box(num) {
+        return num + 100;
+    }
+
+    function box(num) {
+        //会执行这个函数
+        return num + 200;
+    }
+    //返回结果
+    alert(box(50));
+</script>
 </html>
+<!--
+函数是定义一次但却可以调用或执行多次的一段JS代码。函数有时候会有参数，即函数被调用时指定了值的局部变量。函数常常使用这些参数来
+计算一个返回值，这个值也称为函数调用表达式的值。
+一、函数声明
+函数对任何语言来说都是一个核心的概念。通过函数可以封装任意多条语句，而且可以在任何地方、任何时候调用执行。
+ECMAScript中的函数使用function关键字来声明，后跟一组参数以及函数体。
+//没有参数的函数
+function box() {
+    alert('只有函数被调用，我才会被执行!');
+}
+//直接调用函数
+box();
+
+//带参数的函数
+function box(name, age) {
+    alert('你的姓名:'+ name +',年龄:'+ age);
+}
+//调用函数并传参
+box('张波', 18);
+
+二、return返回值
+带参合不带参的函数，都没有定义返回值，而是调用后直接执行的。实际上，任何函数都可以通过return语句跟后面的要返回的值来实现返回值。
+//没有参数的函数
+function box() {
+    //通过return把函数的最终值返回
+    return '我被返回了!';
+}
+//调用函数会得到返回值，然后输出
+alert(box());
+
+//有参数的函数
+function box(name, age) {
+    //通过return把函数的最终值返回
+    return '您的姓名:' + name + ',您的年龄:' + age;
+}
+//调用函数得到返回值，然后外面输出
+alert(box('张波', 18));
+
+我们还可以把函数的返回值赋值给一个变量，然后通过变量进行操作。
+function box(num1, num2) {
+    return num1 * num2;
+}
+//函数得到的返回值赋给变量
+var num = box(10, 7.8);
+alert(num);
+
+return语句还有一个功能就是退出当前函数，注意和break的区别。PS:break只能用在循环和switch语句中。
+function box(num) {
+    //满足条件，就返回num
+    if (num < 10) return num;
+    //返回之后，就不执行下面的语句
+    return 666;
+}
+alert(box(4));
+
+三、arguments对象
+ECMAScript函数不介意传递进来多少参数，也不会因为参数不统一而报错。实际上，函数体内可以通过arguments对象来接收传递进来的参数。
+function box() {
+    //得到每次参数的值
+    return arguments[0] + '|' + arguments[1];
+}
+//传递参数
+alert(box(1, 2, 3, 4, 5, 6));
+
+arguments对象的lengths属性可以得到参数的数量。
+function box() {
+    return arguments.length;
+}
+alert(box(1, 4, 7, 'r'));
+
+我们可以利用length这个属性，来智能的判断有多少参数，然后把参数进行合理的应用。比如，要实现一个加法运算，将所有传进来的数字累加，而数字的个数又不确定。
+function box() {
+    //如果没有参数就返回
+    var sum = 0;
+    if (arguments.length == 0) return sum;
+    for (var i = 0; i < arguments.length; i ++) {
+           sum += arguments[i];
+    }
+    //返回累加结果
+    return sum;
+}
+//调用函数
+alert(box(1, 2));
+
+ECMAScript中的函数，没有像其它高级语言那种函数重载功能。
+function box(num) {
+    return num + 100;
+}
+
+function box(num) {
+    //会执行这个函数
+    return num + 200;
+}
+//返回结果
+alert(box(50));
+-->
