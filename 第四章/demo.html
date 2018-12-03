@@ -20,7 +20,7 @@
     /*
     //Null类型
     var box = null;
-    alert(typeof box);
+    alert(typeof box); //返回object
 
     var car = null;
     if (car != null) {
@@ -107,6 +107,50 @@
     alert(isNaN('34')); //false, 34是一个数值
     alert(isNaN('Code')); //true，'Code'不能转换为数值
     alert(isNaN(true)); //false，true可以转换成1
+    var box = {
+        toString:function () {
+            return 'Lee';
+        }
+    };
+    alert(isNaN(box)); //返回true
+    alert(Number(false)); //返回1, Boolean类型的true和false分别转换成1和0
+    alert(Number(25));    //返回25，数值型直接返回
+    alert(Number(null));  //空对象返回0
+    alert(Number(undefined)); //返回NaN
+
+    alert(Number('456')); //返回456
+    alert(Number('098')); //返回98
+    alert(Number('08.90')); //返回8.9
+    alert(Number('')); //返回0
+    alert(Number('Code124')); //返回NaN
+
+    var box = {
+        toString:function(){
+            return '123'; //可改为'Code124'查看效果
+        }
+    }
+    alert(Number(box));
+
+    alert(parseInt('456Code')); //456，会返回整数部分
+    alert(parseInt('code124')); //NaN，如果第一个不是数值，就返回NaN
+    alert(parseInt('12code3')); //12，从第一个数值开始取，到最后一个连续数值结束
+    alert(parseInt('056.12'));  //56，小数点不是数值，会被去掉
+
+    alert(parseInt('0xA'));     //10，十六进制
+    alert(parseInt('070'));     //70, 十进制
+    alert(parseInt('0xACode')); //10， 十六进制，Code被自动过滤掉
+
+    alert(parseInt('0xAF'));    //175, 十六进制
+    alert(parseInt('AF', 16));  //175， 第二个参数指定十六进制，可以去掉0x前导
+    alert(parseInt('AF'));      //返回NaN
+    alert(parseInt('101010101', 2)); //341，二进制转换
+    alert(parseInt('70', 8));   //56，八进制转换
+
+    alert(parseFloat('123Code'));   //123，去掉不是别的部分
+    alert(parseFloat('0xA'));       //0，不认十六进制
+    alert(parseFloat('123.4.5'));   //123.4，只认一个小数点
+    alert(parseFloat('0123.400'));  //123.4，去掉前后导
+    alert(parseFloat('1.234e7'));   //12340000，把科学计数转成普通数值
     */
 
 </script>
@@ -235,4 +279,61 @@ alert(isNaN(34)); //false
 alert(isNaN('34')); //false, 34是一个数值
 alert(isNaN('Code')); //true，'Code'不能转换为数值
 alert(isNaN(true)); //false，true可以转换成1
+isNaN()函数也适用于对象。在调用isNaN()函数过程中，首先会调用valueOf()方法，然后确定返回值是否能够转换成数值。
+如果不能，则基于这个返回值再调用toString()方法，再测试返回值。
+var box = {
+    //如果能够对象的toString方法能够返回数值，那么就不是NaN了。
+    toString:function () {
+         return '123';
+    }
+};
+alert(isNaN(box)); //返回false
+
+有3个函数可以把非数值转换为数值:Number()、parseFloat()、parseInt()。
+Number()函数是转型函数，可以用于任何数据类型。
+而parseFloat()和parseInt()则专门用于把字符串转成数值。
+alert(Number(true)); //Boolean类型的true和false分别转换成1和0
+alert(Number(25));   //返回25，数值型直接返回
+alert(Number(null)); //返回0，空对象返回0
+alert(Number(undefined)); //返回NaN, undefined返回NaN
+
+如果是字符串，应该遵循以下规则：
+1、只包含数值的字符串，会直接转成十进制数值，如果包含前导0，即自动去掉。
+alert(Number('456')); //返回456
+alert(Number('098')); //返回98
+2、只包含浮点数值的字符串，会直接转成浮点数值，如果包含前导和后导0，即自动去掉。
+alert(Number('08.90')); //返回8.9
+3、如果是空字符串，那么则直接转成0
+alert(Number('')); //返回0
+4、如果不是以上三种字符串类型，则返回NaN。
+alert(Number('Code124')); //返回NaN
+5、如果是对象，首先会调用valueOf()方法，然后确定返回值是否能够转换成数值。如果转换的结果是NaN，则基于这个返回值再调用toString()方法，再测试返回值。
+var box = {
+    toString:function(){
+        return '123'; //可改为'Code124'查看效果
+    }
+}
+alert(Number(box));
+
+由于Number()函数在转换字符串时比较复杂且不够合理，因此处理整数的时候更常用的是parseInt()。
+alert(parseInt('456Code')); //456，会返回整数部分
+alert(parseInt('code124')); //NaN，如果第一个不是数值，就返回NaN
+alert(parseInt('12code3')); //12，从第一个数值开始取，到最后一个连续数值结束
+alert(parseInt('056.12'));  //56，小数点不是数值，会被去掉
+parseInt()除了能够识别十进制数值，也可以识别十六进制。
+alert(parseInt('0xA'));     //10，十六进制
+alert(parseInt('070'));     //70, 十进制
+alert(parseInt('0xACode')); //10， 十六进制，Code被自动过滤掉
+ECMAScript为parseInt()提供了第二个参数，用于解决各种进制的转换。
+alert(parseInt('0xAF'));    //175, 十六进制
+alert(parseInt('AF', 16));  //175， 第二个参数指定十六进制，可以去掉0x前导
+alert(parseInt('AF'));      //返回NaN
+alert(parseInt('101010101', 2)); //341，二进制转换
+alert(parseInt('70', 8));   //56，八进制转换
+parseFloat()是用于浮点数值转换的，和parseInt()一样，从第一位解析到非浮点数值位置
+alert(parseFloat('123Code'));   //123，去掉不是别的部分
+alert(parseFloat('0xA'));       //0，不认十六进制
+alert(parseFloat('123.4.5'));   //123.4，只认一个小数点
+alert(parseFloat('0123.400'));  //123.4，去掉前后导
+alert(parseFloat('1.234e7'));   //12340000，把科学计数转成普通数值
 -->
