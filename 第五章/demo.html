@@ -38,8 +38,67 @@
         }
     };
     alert(++box);
-    */
 
+    var box = 100;
+    alert(+box);
+
+    var box = '89';
+    alert(+box);
+    alert(typeof +box);
+
+    var box = 'ab';
+    alert(+box);
+
+    var box = false;
+    alert(+box);
+    alert(typeof +box);
+
+    var box = 2.3;
+    alert(+box);
+
+    var box = {
+        toString:function(){
+            return '19';
+        }
+    };
+    alert(typeof box);
+    alert(typeof +box);
+    alert(+box);
+
+    var box = 1 + 2;
+    alert(box);
+
+    var box = 1 + NaN;
+    alert(typeof box);
+    alert(box);
+
+    var box = Infinity + Infinity;
+    alert(box);
+
+    var box = -Infinity + -Infinity;
+    alert(box);
+
+    var box = Infinity + -Infinity;
+    alert(box);
+
+    var box = 100 + '100';
+    alert(box);
+
+    var box = '您的年龄是：' + 10 + 20;
+    alert(box);
+    var box = 10 + 20 + '是您的年龄';
+    alert(box);
+    var box = '您的年龄是：' + (10 + 20);
+    alert(box);
+
+    var obj = {
+        toString:function() {
+            return 'ac';
+        }
+    };
+    var box = 1 + obj;
+    alert(box);
+    */
 
 </script>
 </html>
@@ -86,7 +145,58 @@ var box = {             //1，不设置toString或valueOf即为NaN
         return 1;
     }
 }; box++;
+4、加和减运算符
+加运算规则如下：
+var box = 100; +box;    //100，对于数值，不会产生任何影响。
+var box = '89'; +box;   //89，数值字符串转换成数值
+var box = 'ab'; +box;   //NaN，字符串包含非数值转成NaN
+var box = false; +box;  //0；布尔值转化成相应数值
+var box = 2.3; +box;    //2.3，没有变化
+var box = {             //1, 不设置toString()或valueOf()即为NaN
+    toString:function() {
+        return 1;
+    }
+}; +box;
 
+减运算规则如下：
+var box = 100; -box;    //-100，对于数值，直接变负。
+var box = '89'; -box;   //-89，数值字符串转换成数值
+var box = 'ab'; -box;   //NaN，字符串包含非数值转成NaN
+var box = false; -box;  //0；布尔值转化成相应数值
+var box = 2.3; -box;    //-2.3，直接变负
+var box = {             //-1, 不设置toString()或valueOf()即为NaN
+    toString:function() {
+        return 1;
+    }
+}; +box;
+加法和减法运算符一般用于算术运算符，也可像上面进行类型转换。
+三、算术运算符
+ECMAScript定义了5个算术运算符，加减乘除求模(取余)。如果在算术运算符的值不是数值，那么后台会先使用Number()转型函数将其转换为数值(隐式转换)。
+1、加法
+var box = 1 + 2;        //等于3
+var box = 1 + NaN;      //等于NaN，只要有一个NaN就为NaN
+var box = Infinity + Infinity;  //Infinity
+var box = -Infinity + -Infinity;    //-Infinity
+var box = Infinity + -Infinity; //NaN
+var box = 100 + '100';  //100100，字符串连接符，有字符串就不是加法
+var box = '您的年龄是:' + 10 + 20; //您的年龄是:1020，被转换成字符串
+var box = 10 + 20 + '是您的年龄';    //30是您的年龄，没有被转成字符串
+var box = '您的年龄是:'  + (10 + 20);    //您的年龄是:30，没有被转成字符串
+var box = 10 + {};  //10[object Object]，如果有toString()或valueOf()，则返回10+返回数的值
+2、减法
+3、乘法
+4、求模
+四、关系运算符
+用于进行比较的运算符称为关系运算符：小于(<)、大于(>)、小于等于(<=)、大于等于(>=)、相等(==)、不等(!=)、全等(恒等)(===)、不全等(不恒等)(!==)
+和其他运算符一样，当关系运算符操作非数值时要遵循以下规则：
+1、两个操作数都是数值，则数值比较。
+2、两个操作数都是字符串，则比较两个字符串对应的字符编码值。
+3、两个操作数有一个是数值，则将另一个转换为数值，再进行数值比较。
+4、两个操作数有一个是对象，则先调用valueOf()方法或toString()方法，再用结果比较。
 
-
+五、逻辑运算符
+六、位运算符
+七、赋值运算符
+八、其它运算符
+九、运算符优先级
 -->

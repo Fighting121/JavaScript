@@ -201,7 +201,7 @@ delete box.name;        //删除属性
 在实际开发过程中，一般我们更加喜欢字面量的声明方式。因为它更加清晰，语法代码少，而且还给人一种封装的感觉。
 字面量也是面向函数传递大量可选参数的首选方式。
 function box(obj) {     //参数是一个对象
-    if (obj.nam != undefined) alert(obj.name);  //判断属性是否存在
+    if (obj.name != undefined) alert(obj.name);  //判断属性是否存在
     if (obj.age != undefined) alert(obj.age);
 }
 box({   //调用函数传递一个对象
