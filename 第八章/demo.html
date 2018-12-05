@@ -3,8 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <title>对象和数组</title>
+    <script type="text/javascript" src="demo.js"></script>
 </head>
 <body>
 
 </body>
+<script type="text/javascript">
+/*
+var box = new Object();
+box.name = "张波";
+box.age = 18;
+alert(typeof box);
+alert(box.age);
+
+var box = {
+    name:"张波",
+    age:18
+}
+alert(box.name);
+
+var box = {
+    'name':'张波',
+    'age':18
+}
+alert(box.age);
+
+var box = {
+    name:"张波",
+    run:function() {
+        return "运行";
+    }
+};
+alert(box.run());
+alert(box.name);
+delete box.name;
+alert(box.name);
+
+function box(obj) {
+    if (obj.name != undefined) alert(obj.name);
+    if (obj.age != undefined) alert(obj.age);
+}
+box({
+    name:'张波',
+    age:18
+});
+
+var box = new Array();
+var box = new Array(10);
+var box = new Array('张波', '男', 18);
+
+var box = [];
+alert(box);
+var box = ['张波', '男', 18];
+alert(box);
+var box = [1, 2, ];
+alert(box);
+var box = [,,,,];
+alert(box.length);
+
+var box = ['张波', '男', 18];
+alert(box[2]);
+box[1] = '女';
+alert(box[1]);
+box[4] = 'JavaScript';
+alert(box);
+alert(box.length);
+
+var box = [
+    {
+        name:'张波',
+        age:18,
+        run:function() {
+            return "运行";
+        }
+    },
+    ['马云', '习近平', new Object()],
+    '上海',
+    30 + 89,
+    new Array(1, 2, 4)
+];
+
+var box = ['张波', '男', 18];
+alert(box);
+alert(box.push("上海", '闵行'));
+alert(box);
+alert(box.pop());
+alert(box);
+
+var box = ['张波', '男', 18];
+alert(box);
+alert(box.push('上海'));
+alert(box);
+alert(box.shift());
+alert(box);
+
+var box = ['张波', '男', 18];
+alert(box);
+alert(box.unshift('闵行', '上海'));
+alert(box);
+alert(box.shift());
+alert(box);
+alert(box.pop());
+alert(box);
+
+var box = [1, 3, 10, 6, 5, 9];
+alert(box.reverse());
+alert(box);
+
+var box = [4, 13, 8, 6, 5, 9];
+alert(box);
+alert(box.sort());
+alert(box);
+
+var box = [4, 13, 8, 6, 5, 9];
+alert(box);
+alert(box.sort(compare));
+alert(box);
+function compare(a, b) {
+    return a - b;
+}
+
+//concat()不会改变现有数组
+var box = [1, 2, '张波', 18];
+var box2 = box.concat('上海');
+alert(box2);
+alert(box);
+
+var box = [1, 2, '张波', 18];
+var box2 = box.concat(['闵行', '上海'], ['男', 'JavaScript开发']);
+alert(box2);
+alert(box);
+
+//slice()不会改变现有数组
+var box = [1, 2, '张波', 18];
+var box2 = box.slice(1, 3);
+alert(box2);
+alert(box);
+alert(box.slice(1));
+alert(box.slice(1, -2));
+
+//splice会改变现有数组，如果有删除/替换元素，则返回已删除/替换元素的数组
+var box = [1, 2, '张波', 18];
+var box2 = box.splice(1, 1);
+alert(box2);
+alert(box);
+
+var box = [1, 2, '张波', 18];
+var box2 = box.splice(2, 0, '上海');
+alert(box);
+*/
+var box = [1, 2, '张波', 18];
+var box2 = box.splice(0, 2, '闵行', '上海');
+alert(box2);
+alert(box);
+</script>
 </html>
+<!--
+什么是对象，其实就是一种类型，即引用类型。而对象的值就是引用类型的实例。在ECMAScript中引用类型是一种数据结构，用于将数据和功能组织在一起。
+它也常被称为类，但ECMAScript中却没有这种东西。虽然ECMAScript是一门面向对象的语言，却不具备传统面向对象语言所支持的类和接口等基本结构。
+一、Object类型
+到目前为止，我们使用的引用类型最多的可能就是Object类型了。虽然Object的实例不具备多少功能，但对于在应用程序中的存储和传输数据而言，它确实是非常
+理想的选择。
+创建Object类型有两种。一种是使用new运算符，一种是字面量表示法。
+1、使用new运算符创建Object
+var box = new Object(); //new方式
+box.name = "张波";       //创建属性字段
+box.age = 18;           //创建属性字段
+2、new关键字可以省略
+var box = Object();     //省略了new关键字
+3、使用字面量方式创建Object
+var box = {             //字面量方式
+    name:"张波",         //创建属性字段
+    age:18
+}
+4、属性字段也可以使用字符串形式
+var box = {
+    'name':'张波'，
+    'age':18
+}
+5、使用字面量及传统赋值方式
+var box = {};           //字面量方式声明空的对象
+box.name = '张波';       //点符号给属性赋值
+box.age = 18;
+6、两种属性输出方式
+alert(box.name);        //点表示法输出
+alert(box['name'])      //中括号表示法输出，注意引号
+PS：在使用字面量声明Object对象时，不会调用Object()构造函数(Firefox除外)
+7、给对象创建方法
+var box = {
+    run:function() {    //对象中的方法
+        return "运行";
+    }
+}
+alert(box.run());       //调用对象中的方法
+8、使用delete删除对象属性
+delete box.name;        //删除属性
+在实际开发过程中，一般我们更加喜欢字面量的声明方式。因为它更加清晰，语法代码少，而且还给人一种封装的感觉。
+字面量也是面向函数传递大量可选参数的首选方式。
+function box(obj) {     //参数是一个对象
+    if (obj.nam != undefined) alert(obj.name);  //判断属性是否存在
+    if (obj.age != undefined) alert(obj.age);
+}
+box({   //调用函数传递一个对象
+    name:'张波',
+    age:18
+});
+二、Array类型
+除了Object类型之外，Array类型是ECMAScript最常用的类型。而且ECMAScript中的Array类型和其他语言中的数组有着很大的区别。
+虽然数组都是有序排列，但ECMAScript中的数组每个元素可以保存任何类型。ECMAScript中数组的大小也是可以调整的。
+创建Array类型有两种方式：第一种是new运算符，第二种是字面量。
+1、使用new关键字创建数组
+var box = new Array();                      //创建了一个数组
+var box = new Array(10);                    //创建了一个包含10个元素的数组
+var box = new Array('张波', '男', 18);       //创建一个数组并分配好了元素
+2、以上三种方法，可以省略new关键字
+var box = Array();                          //省略了new关键字
+3、使用字面量方式创建数组
+var box = [];                               //创建一个空的数组
+var box = ['张波', '男', 18];                //创建包含元素的数组
+var box = [1, 2, ];                         //禁止这么做，IE会识别3个元素
+var box = [,,,,,,];                         //同样，IE的会识别有问题
+PS：和Object一样，字面量的写法不会调用Array()构造函数。(Firefox除外)
+4、使用索引下标来读取数组的值
+alert(box[2]);                              //获取第三个元素
+box[2] = '学生';                             //修改第三个元素
+box[4] = '计算机编程';                        //增加第五个元素
+5、使用length属性获取数组元素个数
+alert(box.length);                          //获取元素个数
+box.length = 10;                            //强制元素个数
+box[box.length] = 'JS技术';                  //通过length给数组增加一个元素
+6、创建一个稍微复杂的数组
+var box = [
+            {                               //第一个元素是一个对象
+                name:'张波',
+                age:18,
+                run:function() {
+                    return "运行";
+                }
+            },
+            ['马云'， '习近平'， new Object()], //第二个元素是数组
+            '上海',                           //第三个元素是字符串
+            25 + 89,                         //第四个元素是数值
+            new Array(1, 2, 4)               //第五个元素是数组
+];
+alert(box);
+PS：数组最多可包含4294967295个元素，超出即会发生异常。
+三、对象中的方法
+转换方法
+对象或数组都具有toLocalString()、toString()和valueOf()方法。其中toString()和valueOf()无论重写了谁，都会返回相同的值。
+数组会将每个值进行字符串形式的拼接，以逗号隔开。
+var box = ['张波', '男', 18];                  //字面量数组
+alert(box);                                   //隐式的调用了toString()方法
+alert(box.valueOf());                         //和toString()返回一致
+alert(box.toLocalString());                   //返回值和上面两种一致
+默认情况下，数组字符串都会以逗号隔开。如果使用join()方法，则可以使用不同的分隔符来构建这个字符串。
+var box = ['张波', '男', 18];
+alert(box.join('|'));                         //返回张波|男|18
+栈方法
+ECMAScript数组提供了一种让数组的行为类似于其他数据结构的方法。也就是说，可以让数组像栈一样，可以限制插入和删除项的数据结构。
+栈是一种数据结构(后进先出)，也就是说最新添加的元素最早被移除。而栈中元素的插入(或叫推入)和移除(或叫弹出)，只发生在一个位置--栈的顶部。
+ECMAScript为数组专门提供了push()和pop()方法。
+push()方法可以接收任意数量的参数，把它们逐个添加到数组的末尾，并返回修改后数组的长度。
+pop()方法则从数组末尾移除一个元素，减少数组的length值，然后返回移除的元素。
+var box = ['张波', '男', 18];      //字面量声明
+box.push('上海');                  //数组末尾添加一个元素，并且返回数组长度
+alert(box);                       //查看数组
+box.pop();                        //移除数组末尾元素，并返回移除的元素
+alert(box);                       //查看元素
+队列方法
+栈方法是后进先出，而队列方法是先进先出。队列在数组的末端添加元素，从数组的前端移除元素。
+通过push方法向数组末端添加一个元素，然后通过shift()方法从数组前端移除一个元素，并返回移除的元素。
+var box = ['张波', '男', 18];      //字面量声明
+alert(box.push('上海'));          //数组末端添加一个元素，并返回数组的长度
+alert(box);                      //查看数组
+alert(box.shift());              //移除数组开头元素，并返回移除的元素
+alert(box);                      //查看数组
+ECMAScript还为数组提供了一个unshift()方法，它和shift()方法的功能完全相反。
+unshift()方法在数组的前端添加一个元素，并返回修改后数组的长度
+var box = ['张波', '男', 18];       //字面量声明
+alert(box.unshift('上海', '闵行')); //数组开头添加两个元素
+alert(box);                        //查看数组
+alert(box.pop());                  //移除数组末尾元素，并返回移除的元素
+alert(box);                        //查看元素
+PS：IE浏览器对unshift()方法总是返回undefined而不是数组的新长度。
+重排序方法
+数组中已经存在两个可以直接用来排序的方法：reverse()和sort()
+reverse() 逆向排序
+var box = [1, 2, 3, 4, 5];         //字面量声明数组
+alert(box.reverse());              //逆向排序方法，返回排序后的数组
+alert(box);                        //源数组也被逆向排序了，说明是引用
+
+sort() 从小到大排序
+注意：如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序。要实现这一点，首先要把数组的元素都转换成字符串，以便进行比较。
+如果想要按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。
+比较函数应该具有两个参数a和b，其返回值如下：
+1、若a小于b，在排序后的数组中a应该出现在b之前，则返回一个小于0的值。
+2、若a等于b，则返回0。
+3、若a大于b，则返回一个大于0的值。
+
+var box = [4, 1, 7, 3, 9, 2];      //字面量声明数组
+alert(box.sort());                 //从小到大排序，返回排序后的数组
+alert(box);                        //源数组也被从小到大排序了，说明是引用
+sort方法的默认排序在数字排序上有些问题，因为数字排序和数字字符串排序的算法是一样的。我们必须修改这一特征，
+修改的方式，就是给sort()方法传递一个函数参数。这点可以参考手册说明。
+function compare(value1, value2) {  //数字排序的函数参数
+    if (value1 < value2) {          //小于，返回负数-1
+        return -1;
+    } else if(value1 > values) {    //大于，返回正数1
+        return 1;
+    } else {                        //相等，返回0
+        return 0;
+    }
+}
+var box = [0, 1, 5, 10, 15];        //验证数字字符串和数字的区别
+alert(box.sort(compare));           //传参
+PS：如果要反向操作，即从大到小排序，正负颠倒即可。当然，如果要逆序用reverse()更加方便。
+
+操作方法
+ECMAScript为操作已经包含在数组中的元素提供了很多方法。
+concat()方法用于连接两个或多个数组。该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。
+array Object.concat(array1, array2, ... , arrayX)
+arrayX参数必需。该参数可以是具体的值，也可以数组对象。可以是任意多个。
+array返回值返回一个新的数组。该数组是通过把所有arrayX参数添加到arrayObject中生成的。如果要进行concat()操作的参数是数组，
+那么添加的是数组中的元素，而不是数组。
+
+slice(start, end)方法可以基于当前数组获取指定区域元素并创建一个新数组。该方法不会修改数组，而是返回一个子数组。
+其中start必需。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1指最后一个元素，-2指倒数第二个元素，以此类推。
+end可选。规定从何处结束选取。该参数是数组片段结束处的数组下标。如果没有指定该参数，那么切分的数组包含从start到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素。
+
+splice()方法向/从数组中添加/删除项目，然后返回被删除的项目。该方法会改变原始数组。
+array Object.splice(index, howmany, item1, item2, ... , itemX);
+其中index参数必需。整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置。
+howmany参数必需。要删除的项目数量。如果设置为0，则不会删除项目。
+item1,...,itemX参数可选。向数组添加的新项目。
+Array返回值，包含被删除项目的新数组，如果有的话。
+splice()方法可删除从index处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。如果从arrayObject中删除了元素，则返回的是含有被删除的元素的数组。
+
+var box = ['张波', '男', 18];        //当前数组
+var box2 = box.concat('JavaScript');//创建新数组，并添加新元素
+alert(box2);                        //输出新数组
+alert(box);                         //当前数组没有任何变化
+
+var box = ['张波', '男', 18];        //当前数组
+var box2 = box.slice(1);            //box.slice(1, 3), 2~4之间的元素
+alert(box2);                        //男，18
+alert(box);                         //当前数组
+
+splice中的删除功能：
+var box = ['张波', '男', 18];        //当前数组
+var box2 = box.splice(0, 2);        //截取前两个元素
+alert(box2);                        //返回截取的元素
+alert(box);                         //当前数组被截取的元素被删除
+
+splice中的插入功能
+var box = ['张波', '男', 18];        //当前数组
+var box2 = box.splice(1, 0, 'JavaScript', '上海');    //没有截取，但插入了两条
+alert(box2);                        //在第2个位置插入两条
+alert(box);                         //输出
+
+splice中的替换功能：
+var box = ['张波', '男', 18];        //当前数组
+var box2 = box.splice(1, 1, 100);   //截取了第二条，替换成100
+alert(box2);                        //输出截取的18
+alert(box);                         //输出数组
+-->

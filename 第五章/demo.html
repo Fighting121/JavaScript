@@ -9,6 +9,84 @@
 
 </body>
 <script type="text/javascript">
+    /*
+    var box = 100;
+    alert(box++);   //返回100
+    alert(++box);   //返回102
+    alert(--box);   //返回101
+    alert(box--);   //返回101
+
+    var box = '89';
+    box++;
+    alert(box);
+
+    var box = 'ab';
+    box++;
+    alert(box);
+
+    var  box = false;
+    box++;
+    alert(box);
+
+    var box = 2.3;
+    box++;
+    alert(box);
+
+    var box = {
+        valueOf:function() {
+            return 1;
+        }
+    };
+    alert(++box);
+    */
+
 
 </script>
 </html>
+<!--
+ECMA-262描述了一组用于操作数据值的运算符，包括一元运算符、布尔运算符、算术运算符、关系运算符、三元运算符、位运算符以及赋值运算符。
+ECMAScript中的运算符适用于很多值，包括字符串、数值、布尔值、对象等。不过，通过上一章节我们了解到，应用于对象时通常会调用valueOf()
+和toString()方法，以便取得相应的值。
+PS：前面的章节我们讲过typeof操作符、new操作符也可以成为typeof运算符、new运算符，是同一个意思。
+一、什么是表达式
+表达式是ECMAScript中的一个"短语"，解释器会通过计算把它转换成一个值。最简单的表达式是字面量或变量名。例如：
+5.96                        //数值字面量
+'Lee'                       //字符串字面量
+true                        //布尔值字面量
+null                        //空值字面量
+/Java/                      //正则表达式字面量
+{x:!, y:2}                  //对象字面量、对象表达式
+[1, 2, 3]                   //数组字面量、数组表达式
+function(n) {return x + y}  //函数字面量、函数表达式
+box                         //变量
+当然，还可以通过合并简单的表达式来创建更复杂的表达式。比如：
+box + 5.96                  //加法运算的表达式
+typeof(box)                 //查看数据类型的表达式
+box > 8                     //逻辑运算表达式
+通过上面的叙述，我们得知，单一的字面量和组合字面量的运算符都可称为表达式。
+
+二、一元运算符
+只能操作一个值的运算符叫做一元运算符。
+1、递增++和递减—-
+var box = 100;
+++box;  //把box累加一个1，相当于box = box + 1
+--box;  //把box累减一个1，相当于box = box - 1
+box++;  //同上
+box--;  //同上
+2、前置和后置的区别
+在没有赋值操作，前置和后置是一样的。但在赋值操作时，如果递增或递减运算符前置，那么前置的运算符会先累加或累减再赋值，
+如果是后置运算符则先赋值再累加或累减。
+3、其它类型应用一元运算符的规则
+var box = '89'; box++;  //最终box的值为90, 数值字符串自动转换成数值
+var box = 'ab'; box++;  //NaN, 字符串包含非数值转成NaN
+var box = false; box++; //1, false转成数值是0，累加就是1
+var box = 2.3; box++;   //3.3，直接加1
+var box = {             //1，不设置toString或valueOf即为NaN
+    toString:function() {
+        return 1;
+    }
+}; box++;
+
+
+
+-->
