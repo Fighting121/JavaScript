@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基本包装类型(上)</title>
+    <script type="text/javascript" src="demo.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<!--
+为了便于操作基本类型值，ECMAScript提供了3个特殊的引用类型：Boolean、Number和String。这些类型与其它引用类型相似，但同时
+也具有与各自的基本类型相应的特殊行为。实际上，每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而能
+够调用一些方法来操作这些数据。
+一、基本包装类型概述
+//定义一个字符串
+var str = 'Mr.Lee';
+//截掉字符串前两位
+var box2 = str.substring(2);
+//输出新字符串
+alert(box2);
+
+变量box是一个字符串类型，而box.substring(2)又说明它是一个对象(只有对象才会调用方法)，最后把处理结果赋值给box2。'Mr.Lee'
+是一个字符串类型的值，按道理它不应该是对象，不应该会有自己的方法，比如：
+//直接通过值来调用方法
+alert('Mr.lee'.substring(2));
+
+1、字面量写法：
+//字面量
+var box = 'Mr.Lee';
+//无效属性
+box.name = 'Lee';
+//无效方法
+box.age = function() {
+    return 100;
+}
+
+alert(box); //Mr.Lee
+alert(box.substring(2)); //.Lee
+alert(typeof box); //string
+alert(box.name); //undefined
+alert(box.age()); //错误
+
+2、new运算符写法
+//new运算符
+var box = new String('Mr.Lee');
+//有效属性
+box.name = 'Lee';
+//有效方法
+box.age = function () {
+    return 100;
+}
+
+alert(box); //Mr.Lee
+alert(box.substring(2)); //.Lee
+alert(typeof box); //object
+alert(box.name); //Lee
+alert(box.age()); //100
+
+以上字面量声明和new运算符声明很好的展示了他们之间的区别。但有一点还是可以肯定的，那就是不管字面量形式还是new运算符形式，
+都可以使用它的内置方法。并且Boolean和Number特性与String相同，三种类型可以成为基本包装类型。
+PS：在使用new运算符创建以上三种类型的对象时，可以给自己添加属性和方法，但我们建议不要这样使用，因为这样会导致根本分不清
+到底是基本类型值还是引用类型值。
+
+二、Boolean类型
+Boolean类型没有特定的属性和方法。
+
+三、Number类型
+Number类型有一些静态属性(直接通过Number调用的属性，而无须new运算符)和方法。
+Number静态属性
+MAX_VALUE：表示最大数
+MIN_VALUE：表示最小数
+NaN：非数值
+NEGATIVE_INFINITY：负无穷大，溢出返回该值
+POSITIVE_INFINITY：正无穷大，溢出返回该值
+prototype：原型，用于增加新属性和方法
+
+Number对象的方法
+toString()：将数值转化为字符串，并且可以转换进制
+toLocaleString()：根据本地数字格式转换为字符串
+toFixed()：将数字保留小数点后指定位数并转化为字符串
+toExponential()：将数字以指数形式表示，保留小数点后指定位数并转化为字符串
+toPrecision()：指数形式或点形式表述数，保留小数点后指定位数并转化为字符串
+
+var box = 1000.789;
+//转换为字符串，传参可以转换进制
+alert(box.toString());
+//本地形式，1,000.789
+alert(box.toLocalString());
+//小数点保留，100.79
+alert(box.toFixed(2));
+//指数形式，传参会保留小数点
+alert(box.toExponential());
+//指数或点形式，传参会保留小数点
+alert(box.toPrecision(3));
+
+四、String类型
+String类型包含了三个属性和大量的可用内置办法。
+String对象属性
+length：返回字符串的字符长度
+constructor：返回创建String对象的函数
+prototype：通过添加属性和方法扩展字符串定义
+
+String也包含对象的通用方法，比如valueOf()、toLocalString()和toString()方法，但这些方法都返回字符串的基本值。
+字符方法
+charAt(n)：返回指定索引位置的字符
+charCodeAt(n)：以Unicode编码形式返回指定索引位置的字符
+
+var box = 'Mr.Lee';
+alert(box.charAt(1)); //返回r
+alert(box.charCodeAt(1)); //返回114
+alert(box[1]); //返回r，通过数组方式截取
+PS：box[1]在IE浏览器会显示undefined，所以使用时要谨慎。
+
+字符串操作方法
+concat(str1...str2)：将字符串参数串联到调用该方法的字符串
+slice(n,m)：返回字符串n到m之间位置的字符串
+substring(n,m)：同上
+substr(n,m)：返回字符串n开始的m个字符串
+
+var box = 'Mr.Lee';
+alert(box.concat('is', 'Teacher', '!')); //Mr.Lee is Teacher!
+alert(box.slice(3)); //Lee
+alert(box.slice(3,5)); //Le
+alert(box.substring(3)); //Lee
+alert(box.substring(3,5)); //Le
+alert(box.substr(3)); //Lee
+alert(box.substr(3,5)); //Lee
+
+var box = 'Mr.Lee';
+alert(box.slice(-3)); //Lee, 6+(-3)=3位开始
+alert(box.substring(-3)); //Mr.Lee 负数返回全部
+alert(box.substr(-3));  //Lee，6+(-3)=3位开始
+
+var box = 'Mr.Lee';
+alert(box.slice(3,-1)); //Le 6+(-1)=5，(3,5)
+alert(box.substring(3,-1)); //Mr. 第二个参数为负，直接转为0，并且方法会把较小的数字提前，(0,3)
+alert(box.substr(3,-1)); //'' 第二个参数为负，直接转0，(3,0)
+PS：IE的JavaScript实现在处理向substr()方法传递负值的情况下存在问题，它会返回原始字符串，使用时要切记。
+
+字符串位置方法
+indexOf(str,n)：从n开始搜索的第一个str，并将搜索的索引值返回
+lastIndexOf(str,n)：从n开始搜索的最后一个str，并将搜索的索引值返回
+
+var box = 'Mr.Lee is Lee';
+alert(box.indexOf('L')); //3
+alert(box.indexOf('L', 5)); //10
+alert(box.lastIndexOf('L')); //10
+alert(box.lastIndexOf('L', 5)); //3，从指定的位置向前搜索
+PS：如果没有找到想要的字符串，则返回-1。
+
+示例：找出全部的L
+var box = 'Mr.Lee is Lee'; //包含两个L的字符串
+var boxarr = []; //存放L位置的数组
+var pos = box.indexOf('L'); //先获取第一个L的位置
+while (pos > -1) { //如果位置大于-1，说明还存在L
+    boxarr.push(pos); //添加到数组
+    pos = box.indexOf('L', pos + 1); //重新赋值pos目前的位置
+}
+alert(boxarr); //输出
+
+大小写转换方法
+toLowerCase(str)：将字符串全部转换为小写
+toUpperCase(str)：将字符串全部转换为大写
+toLocaleLowerCase(str)：将字符串全部转换为小写，并且本地化
+toLocaleUpperCase(str)：将字符串全部转换为大写，并且本地化
+
+var box = 'Mr.Lee is Lee';
+alert(box.toLowerCase());
+alert(box.toUpperCase());
+alert(box.toLocaleLowerCase());
+alert(box.toLocaleUpperCase());
+PS：只有几种语言(如土耳其语)具有地方特有的大小写本地性，一般来说，是否本地化效果都是一致的。
+
+字符串的模式匹配方法
+match(pattern)：返回pattern中的子串或null
+replace(pattern, replacement)：用replacement替换pattern
+search(pattern)：返回字符串中pattern开始位置
+split(pattern)：返回字符串按指定pattern拆分的数组
+正则表达式在字符串中的应用，在前面的章节已经详细探讨过，这里就不再赘述了。以上中match()、replace()、search()、split()在
+普通字符串中也可以使用。
+
+var box = 'Mr.Lee is Lee';
+alert(box.match('L')); //找到L，返回L 否则返回null
+alert(box.search('L')); //找到L的位置，和indexOf类型
+alert(box.replace('L', 'Q')); //把L替换成Q
+alert(box.split('')); //以空格分割成字符串
+
+其他方法
+fromCharCode(ascii)：静态方法，输出ASCII码对应值
+localeCompare(str1, str2)：比较两个字符串，并返回相应的值
+
+alert(String.fromCharCode(76)); //L，输出ASCII对应值
+
+localeCompare(str1, str2)方法详解：比较两个字符串并返回以下值中的一个：
+1、如果字符串在字母表中应该排在字符串参数之前，则返回一个负数。(多数为-1)
+2、如果字符串等于字符串参数，则返回0。
+3、如果字符串在字母表中应该排在字符串参数之后，则返回一个正数。(多数为1)
+
+var box = 'Lee';
+alert(box.localeCompare('apple')); //1
+alert(box.localeCompare('Lee'));   //0
+alert(box.localeCompare('zoo'));   //-1
+
+HTML方法
+anchor(name)：<a name='name'>str</a>
+big()：<big>str</big>
+blink()：<blink>str</blink>
+bold()：<b>str</b>
+fixed()：<tt>str</tt>
+fontcolor(color)：<font color='color'>str</font>
+fontsize(color)：<font size='size'>str</font>
+link(URL)：<a href='URL'>str</a>
+small()：<small>str</small>
+strike()：<strike>str</strike>
+italics()：<i>italics</i>
+sub()：<sub>str</sub>
+sup()：<sup>str</sup>
+
+以上是通过JS代码生成一个HTML标签，根据经验，没什么太大用处，做个了解。
+var box = 'Lee';
+alert(box.link('http://www.yc60.com')); //超链接
+-->
