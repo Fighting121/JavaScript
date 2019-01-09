@@ -245,6 +245,366 @@ Box.prototype = {
     }
 };
 
+使用构造函数创建原型对象和使用字面量创建对象在使用上基本相同，但还是有一些区别，字面量创建的方式使用constructor属性
+不会指向实例，而会指向Object，构造函数创建的方式则相反。
+var box = new Box();
+alert(box instanceof Box);
+alert(box instanceof Object);
+//字面量方式，返回false，否则，true
+alert(box.constructor == Box);
+//字面量方式，返回true，否则，false
+alert(box.constructor == Object);
+
+如果想让字面量方式的constructor指向实例对象，那么可以这么做：
+Box.prototype = {
+    //直接强制指向即可
+    constructor: Box;
+};
+
+PS：字面量方式为什么constructor会指向Object？因为Box.prototype = {}; 这种写法其实就是创建了一个新对象。而每创建一个函数，
+就会同时创建它prototype，这个对象也会自动获取constructor属性。所以，新对象的constructor重写了Box原来的constructor，因此
+会指向新对象，那个新对象没有指定构造函数，那么就默认为Object。
+
+原型的声明是有先后顺序的，所以，重写的原型会切断之前的原型。
+function Box() {};
+//原型被重写了
+Box.prototype = {
+    constructor: Box,
+    name: 'Lee',
+    age: 38,
+    run: function () {
+        return this.name + this.age + '运行中...';
+    }
+};
+
+Box.prototype = {
+    age = 200;
+}
+
+//在这里声明
+var box = new Box();
+//box只是最初声明的原型
+alert(box.run());
+
+原型对象不仅仅可以在自定义的情况下使用，而ECMAScript内置的引用类型都可以使用这种方式，并且内置的引用类型本身也使用了原型。
+//sort就是Array类型的原型方法
+alert(Array.prototype.sort);
+
+//substring就是String类型的原型方法
+alert(String.prototype.substring);
+
+//给String类型添加一个方法
+String.prototype.addstring = function () {
+    //this代表调用的字符串
+    return this + ', 被添加了!';
+};
+//使用这个方法
+alert('Lee'.addstring());
+
+PS：尽管给原生的内置引用类型添加方法使用起来特别方便，但我们不推荐使用这种方法。因为它可能会导致命名冲突，不利于代码维护。
+
+原型模式创建对象也有自己的缺点，它省略了构造函数传参初始化这一过程，带来的缺点就是初始化的值都是一致的。而原型最大的缺点就是它
+最大的优点，那就是共享。
+原型中所有属性是被很多实例共享的，共享对于函数非常合适，对于包含基本值的属性也还可以。但如果属性包含引用类型，就存在一定的问题。
+
+function Box() {};
+Box.prototype = {
+    constructor: Box,
+    name: 'Lee',
+    age: 100,
+    family: ['父亲', '母亲', '妹妹'],
+    run: function () {
+        return this.name + this.age + this.family;
+    }
+};
+
+var box1 = new Box();
+//在实例中添加'哥哥'
+box1.family.push('哥哥');
+alert(box1.run());
+
+var box2 = new Box();
+//共享带来的麻烦，也有'哥哥'了
+alert(box2.run());
+PS：数据共享的缘故，导致很多开发者放弃使用原型，因为每次实例化出的数据需要保留自己的特性，而不能共享。
+
+为了解决构造传参和共享问题，可以组合构造函数+原型模式：
+//不共享的使用构造函数
+function Box(name, age) {
+    this.name = name；
+    this.age = age；
+    this.family = ['父亲', '母亲', '妹妹'];
+}
+
+//共享的使用原型模式
+Box.prototype = {
+    constructor: Box,
+    run: function () {
+        return this.name + this.age + this.family;
+    }
+};
+PS：这种混合模式很好的解决了传参和引用共享的大难题。是创建对象比较好的办法。
+
+原型模式，不管你是否调用了原型中的共享方法，它都会初始化原型中的方法，并且在声明一个对象时，构造函数+原型部分让人
+感觉又很怪异，最好就是把构造函数和原型封装到一起。为了解决这个问题。我们可以使用动态原型模式。
+
+//将所有信息封装到函数体内
+function Box(name, age) {
+    this.name = name;
+    this.age = age;
+
+    //仅在第一次调用的时候初始化
+    if (typeof this.run != 'function') {
+        Box.prototype.run = function () {
+            return this.name + this.age + '.运行中..';
+        };
+    }
+}
+
+var box = new Box('Lee', 100);
+alert(box.run());
+当第一次调用构造函数时，run()方法发现不存在，然后初始化原型。当第二次调用，就不会初始化，并且第二次创建新对象，
+原型也不会再初始化了。这样既得到了封装，又实现了原型方法共享，并且属性都保持独立。
+
+if (typeof this.run != 'function') {
+    //测试用
+    alert('第一次初始化');
+    Box.prototype.run = function () {
+        return this.name + this.age + '运行中...';
+    };
+}
+
+//第一次创建对象
+var box = new Box('Lee', 100);
+//第一次调用
+alert(box.run());
+//第二次调用
+alert(box.run());
+
+//第二次创建对象
+var box2 = new Box('Jack', 20);
+alert(box2.run());
+alert(box2.run());
+
+PS：使用动态原型模式，要注意一点，不可以再使用字面量的方式重写原型，因为会切断实例和新原型之间的联系。
+
+以上讲解了各种方式对象创建的方法，如果这几种方式都不能满足需求，可以使用最开始那种模式：寄生构造函数。
+function Box(name, age) {
+    var obj = new Object();
+    obj.name = name;
+    obj.age = age;
+    obj.run = function () {
+        return this.name + this.age + '运行中...';
+    };
+    return obj;
+}
+
+寄生构造函数，其实就是工厂模式+构造函数模式。这种模式比较通用，但不能确定对象关系，所以，在可以使用之前所说的模式时，不建议使用此模式。
+在什么情况下使用寄生构造函数比较合理呢？假设要创建一个具有额外方法的引用类型。由于之前说明不建议直接String.prototype.addstring，
+可以通过寄生构造的方式添加。
+function myString(string) {
+    var str = new String(string);
+    str.addstring = function () {
+          return this + '，被添加了！';
+    }；
+    return str;
+}
+
+//比直接在引用原型中添加繁琐好多
+var box = new myString('Lee');
+alert(box.addstring());
+
+在一些安全的环境中，比如禁止使用this和new，这里的this是构造函数里不使用this，这里的new是在外部实例化构造函数时不使用new。
+这种创建方式叫做稳妥构造函数。
+function Box(name, age) {
+    var obj = new Object();
+    obj.run = function () {
+        //直接打印参数即可
+        return name + age + '运行中...';
+    };
+    return obj;
+}
+
+//直接调用函数
+var box = Box('Lee', 100);
+alert(box.run());
+
+PS：稳妥构造函数和寄生类似。
 
 四、继承
+继承是面向对象中一个比较核心的概念。其它正统面向对象语言都会使用两种方式实现继承：一个是接口实现，一个是继承。而ECMAScript只支持
+继承，不支持接口实现，而实现继承的方式是依靠原型链完成。
+//Box构造
+function Box() {
+    this.name = 'Lee';
+}
+
+//Desk构造
+function Desk() {
+    this.age = 100;
+}
+//Desc继承了Box，通过原型，形成链条
+Desk.prototype = new Box();
+
+var desk = new Desk();
+alert(desk.age);
+//得到被继承的属性
+alert(desk.name);
+
+//Table构造
+function Table() {
+    this.level = 'AAAAA';
+}
+//继续原型链继承
+Table.prototype = new Desk();
+
+var table = new Table();
+//继承了Box和Desk
+alert(table.name);
+
+原型链继承示意图如图inherit.png所示。
+如果要实例化table，那么Desk实例中有age=100，原型中增加相同的属性age=200，最后结果是多少呢？
+//实例和原型中均包含age
+Desk.prototype.age = 200;
+PS：以上原型链继承还缺少一环，那就是Object，所有的构造函数都继承自Object。而继承Object是自动完成的，并不需要程序员手动继承。
+
+经过集成后的实例，它们的从属关系会怎么样呢？
+alert(table instanceof Object); //true
+alert(desk instanceof Table); //false，desk是table的超类
+alert(table instanceof Box); //true
+alert(table instanceof Desk); //true
+
+在JavaScript里，被继承的函数成为超类型(父类，基类也行，其它语言叫法)，继承的函数成为子类型(子类，派生类)。继承也有之前问题，
+比如字面量重写原型会中断关系，使用引用类型的原型，并且子类型无法给超类型传递参数。
+为了解决引用共享和超类型无法传参的问题，我们采用一种叫借用构造函数的技术，或者成为对象冒充(伪造对象、经典继承)的技术阿里解决这两种问题。
+function Box(age) {
+    this.name = ['Lee', 'Jack', 'Hello'];
+    this.age = age;
+}
+
+function Desk(age) {
+    //对象冒充，给超类型传参
+    Box.call(this, age);
+}
+
+var desk = new Desk(200);
+alert(desk.age);
+alert(desk.name);
+//添加新的数据
+desk.name.push('AAA');
+alert(desk.name);
+
+借用构造函数虽然解决了刚才两种问题，但没有原型，复用则无法谈起。所以，我们需要原型链+借用构造函数的模式，这种模式称为组合继承。
+function Box(age) {
+    this.name = ['Lee', 'Jack', 'Hello'];
+    this.age = age;
+}
+
+Box.prototype.run = function () {
+    return this.name + this.age;
+}
+
+//对象冒充
+function Desk(age) {
+    Box.call(this, age);
+}
+
+//原型链继承
+Desk.prototype = new Box();
+
+var desk = new Desk(100);
+alert(desk.run());
+
+还有一种继承模式叫做：原型式继承；这种继承借助于原型并基于已有的对象创建新对象，同时还不必因此创建自定义类型。
+function obj(0) {          //传递一个字面量函数
+    function F() {}        //创建一个构造函数
+    F.prototype = o;       //把字面量函数赋值给构造函数的原型
+    return new F();        //最终返回出实例化的构造函数
+}
+
+var box = {                //字面量对象
+    name: 'Lee',
+    arr: ['哥哥', '妹妹', '姐姐']
+};
+
+var box1 = obj(box);       //传递
+alert(box1.name);
+
+box1.name = 'Jack';
+alert(box1.name);
+
+alert(box1.arr);
+box1.arr.push('父母');
+alert(box1.arr);
+
+var box2 = obj(box);        //传递
+alert(box2.name);
+alert(box2.arr);            //引用类型共享了
+
+寄生式继承把原型模式+工厂模式结合而来，目的是为了封装创建对象的过程。
+function create(o) {       //封装创建过程
+    var f = obj(o);
+    f.run = function () {
+        return this.arr;   //同样，会共享引用
+    };
+    return f;
+}
+
+组合式继承是JavaScript最常用的继承模式；但组合式继承也有一点小问题，就是超类型在使用过程中会被调用两次：
+一次是创建子类的时候，另一次是在子类型构造函数的内部。
+function Box(name) {
+    this.name = name;
+    this.arr = ['哥哥', '妹妹', '父母'];
+};
+
+Box.prototype.run = function () {
+    return this.name;
+};
+
+function Desk(name, age) {
+    Box.call(this, name);       //第二次调用Box
+    this.age = age;
+}
+
+Desk.prototype = new Box();     //第一次调用Box
+
+以上代码是之前的组合继承，那么寄生组合继承，解决了两次调用的问题。
+function obj(o) {
+    function F() {};
+    F.prototype = o;
+    return new F();
+}
+
+function inPrototype(box, desk) {
+    var f = obj(box.prototype);
+    f.constructor = desk;
+    desk.prototype = f;
+}
+
+function Box(name) {
+    this.name = name;
+    this.arr = ['哥哥', '妹妹', '父母'];
+}
+
+Box.prototype.run = function () {
+    return this.name;
+}
+
+function Desk(name, age) {
+    Box.call(this, name);
+    this.age = age;
+}
+
+//通过这里实现继承
+inPrototype(Box, Desk);
+
+var desk = new Desk('Lee', 100);
+desk.arr.push('姐姐');
+alert(desk.arr);
+//只共享了方法
+alert(desk.run());
+
+var desk2 = new Desk('Jack', 200);
+//引用问题解决
+alert(desk2.arr);
 -->
