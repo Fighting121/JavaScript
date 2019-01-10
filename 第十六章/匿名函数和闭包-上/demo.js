@@ -1,14 +1,13 @@
-function box() {
-    var arr = [];
-    for (var i = 0; i< 5; i++) {
-        arr[i] = (function (num) {
-            return num;
-        })(i);
+function Desk() {};
+var box = function () {
+    var age = 100;
+    function run () {
+        return '运行中...';
     }
-    return arr;
-}
-
-var b = box();
-for (var i = 0; i < b.length; i++) {
-    alert(b[i]);
-}
+    var desk = new Desk();
+    desk.go = function () {
+        return age + run();
+    };
+    return desk;
+}();
+alert(box.go());
