@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09a13e0e-64d5-48b4-9435-996cc8e1a950" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/第十六章/匿名函数和闭包-上/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/第十六章/匿名函数和闭包-上/demo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/第十六章/匿名函数和闭包-上/demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/第十六章/匿名函数和闭包-上/demo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/zhangbo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/zhangbo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第十七章/BOM-上/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/第十七章/BOM-上/demo.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,22 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/第十七章/BOM-上/demo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="224" column="36" selection-start-line="224" selection-start-column="36" selection-end-line="224" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/第十七章/BOM-上/demo.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,10 +37,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/demo1.html" />
-        <option value="$PROJECT_DIR$/demo2.html" />
-        <option value="$PROJECT_DIR$/使用JavaScript.html" />
-        <option value="$PROJECT_DIR$/第二章/demo.js" />
         <option value="$PROJECT_DIR$/第三章/demo.js" />
         <option value="$PROJECT_DIR$/第二章/demo.html" />
         <option value="$PROJECT_DIR$/第三章/demo.html" />
@@ -90,6 +72,22 @@
         <option value="$PROJECT_DIR$/第十六章/匿名函数和闭包-上/demo.js" />
         <option value="$PROJECT_DIR$/第十七章/BOM-上/demo.js" />
         <option value="$PROJECT_DIR$/第十七章/BOM-上/demo.html" />
+        <option value="$PROJECT_DIR$/第十九章/DOM基础-1/demo.html" />
+        <option value="$PROJECT_DIR$/第十九章/DOM基础-1/demo.js" />
+        <option value="$PROJECT_DIR$/第二十章/DOM进阶-上/demo.js" />
+        <option value="$PROJECT_DIR$/第二十章/DOM进阶-上/demo.html" />
+        <option value="$PROJECT_DIR$/第二十一章/DOM操作表格及样式-1/demo.js" />
+        <option value="$PROJECT_DIR$/第二十一章/DOM操作表格及样式-1/demo.html" />
+        <option value="$PROJECT_DIR$/第二十二章/DOM元素尺寸和位置-上/demo.js" />
+        <option value="$PROJECT_DIR$/第二十二章/DOM元素尺寸和位置-上/demo.html" />
+        <option value="$PROJECT_DIR$/第二十三章/demo.js" />
+        <option value="$PROJECT_DIR$/第二十三章/demo.html" />
+        <option value="$PROJECT_DIR$/第二十五章/事件对象-上/demo.html" />
+        <option value="$PROJECT_DIR$/第二十五章/事件对象-上/demo.js" />
+        <option value="$PROJECT_DIR$/第二十四章/demo.html" />
+        <option value="$PROJECT_DIR$/第二十四章/demo.js" />
+        <option value="$PROJECT_DIR$/第三十二章/demo.html" />
+        <option value="$PROJECT_DIR$/第三十二章/demo.js" />
       </list>
     </option>
   </component>
@@ -100,8 +98,7 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="6" />
-    <option name="y" value="23" />
+    <option name="y" value="27" />
     <option name="width" value="1258" />
     <option name="height" value="686" />
   </component>
@@ -132,17 +129,6 @@
             <path>
               <item name="JavaScript" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="JavaScript" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="第十七章" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="JavaScript" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="第十七章" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="BOM-上" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -207,16 +193,15 @@
       <workItem from="1546506019089" duration="7188000" />
       <workItem from="1546567071934" duration="24167000" />
       <workItem from="1546832586477" duration="29242000" />
-      <workItem from="1546917773476" duration="61574000" />
+      <workItem from="1546917773476" duration="123302000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193194000" />
+    <option name="totallyTimeSpent" value="254922000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="23" width="1258" height="686" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="27" width="1258" height="686" extended-state="0" />
     <layout>
       <window_info id="Structure" order="0" weight="0.2494043" />
       <window_info id="Favorites" order="1" side_tool="true" />
@@ -241,59 +226,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/1" />
-    <entry file="file://$PROJECT_DIR$/demo2.html" />
-    <entry file="file://$PROJECT_DIR$/demo1.html" />
-    <entry file="file://$PROJECT_DIR$/使用JavaScript.html" />
-    <entry file="file://$PROJECT_DIR$/第二章/使用JavaScript.html" />
-    <entry file="file://$PROJECT_DIR$/第二章/demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第四章/demo.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第七章/demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" selection-start-column="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第三章/demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第一章/demo.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第五章/demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第五章/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1370">
-          <caret line="178" column="19" selection-start-line="178" selection-start-column="11" selection-end-line="178" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第二章/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="38" column="19" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/第七章/demo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-617">
@@ -352,13 +284,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/第十一章/Function类型-上/demo.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第十章/正则表达式-1/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="332" column="5" selection-start-line="332" selection-start-column="5" selection-end-line="332" selection-end-column="5" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/第十一章/Function类型-上/demo.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -471,12 +396,124 @@
     <entry file="file://$PROJECT_DIR$/第十七章/BOM-上/demo.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/第十七章/BOM-上/img/window.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/第十七章/BOM-上/demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="224" column="36" selection-start-line="224" selection-start-column="36" selection-end-line="224" selection-end-column="36" />
+        <state relative-caret-position="-763">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第十九章/DOM基础-1/img/node1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第十章/正则表达式-1/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1656">
+          <caret line="173" column="5" lean-forward="true" selection-start-line="173" selection-start-column="5" selection-end-line="173" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第十九章/DOM基础-1/demo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="48" selection-start-column="48" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第十九章/DOM基础-1/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9058">
+          <caret line="375" column="34" selection-start-line="375" selection-start-column="34" selection-end-line="375" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="4679" column="4" selection-start-line="4679" selection-start-column="4" selection-end-line="4679" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十章/DOM进阶-上/demo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十章/DOM进阶-上/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="242" column="17" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十一章/DOM操作表格及样式-1/demo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十一章/DOM操作表格及样式-1/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="400" column="28" selection-start-line="400" selection-start-column="28" selection-end-line="400" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十二章/DOM元素尺寸和位置-上/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十二章/DOM元素尺寸和位置-上/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="141" column="1" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十三章/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十五章/事件对象-上/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十五章/事件对象-上/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十四章/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十四章/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第三十二章/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第三十二章/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十三章/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
