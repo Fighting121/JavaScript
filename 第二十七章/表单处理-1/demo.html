@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单处理(1)</title>
+    <script type="text/javascript" src="demo.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<!--
+为了分担服务器处理表单的压力，JavaScript提供了一些解决方案，从而大大打破了处处依赖服务器的局面。
+一、表单介绍
+在HTML中，表单是由<form>元素来表示的，而在JavaScript中，表单对应的则是HTMLFormElement类型。HTMLFormElement继承了HTMLElement，
+因此它拥有HTML元素具有的默认属性，并且还独有自己的属性和方法：
+HTMLFormElement属性和方法
+acceptCharset:服务器能够处理的字符集
+action:接受请求的URL
+elements:表单中所有控件的集合
+enctype:请求的编码类型
+length:表单中控件的数量
+name:表单的名称
+target:用于发送请求和接受响应的窗口名称
+reset():将所有表单重置
+submit():提交表单
+
+获取表单<form>对象的方法有很多种，如下：
+//使用ID获取<form>元素
+document.getElementById('myForm');
+//使用第一个元素方式获取
+document.getElementsByTagName('form')[0];
+//使用forms的数字下标获取元素
+document.forms[0];
+//使用forms的名称下标获取元素
+document.forms['yourForm'];
+//使用name名称直接获取元素
+document.yourForm;
+
+PS：最后一种方法使用name名称直接获取元素，已经不推荐使用，这是向下兼容的早期用法。问题颇多，比如有两个相同名称的，变成数组；而且这种方式
+以后有可能会不兼容。
+
+提交表单
+通过事件对象，可以阻止submit的默认行为，submit事件的默认行为就是携带数据跳转到指定页面。
+addEvent(fm, 'submit', function (evt) {
+    preDef(evt);
+});
+
+我们可以使用submit()方法自定义触发submit事件，也就是说，并不一定非要点击submit按钮才能提交。
+//判断按住了ctrl和enter键触发
+if (e.ctrlKey && e.keyCode == 13) fm.submit();
+
+PS：在表单中尽量避免使用name = 'submit' 或 id = 'submit'等命名，这会和submit()方法发生冲突导致无法提交。
+
+提交数据最大的问题就是重复提交表单。因为各种原因，当一条数据提交到服务器的时候会出现延迟等长时间没反映，导致用户不停的点击提交，从而使得重复
+提交了很多相同的请求，或造成错误、或写入数据库多条相同信息。
+//模拟延迟
+addEvent(fm, 'submit', function(evt) {
+    preDef(evt);
+    setTimeout(function () {
+        fm.submit();
+    }, 3000);
+});
+
+有两种方法可以解决这种问题：第一种就是提交之后，立刻禁用点击按钮；第二种就是提交之后取消后续的表单提交操作。
+//将按钮禁用
+document.getElementById('sub').disabled = true;
+//设置一个监听变量
+var flag = false;
+//如果存在返回退出事件
+if (flag) return;
+//否则确定是第一次，设置为true
+flag = true;
+
+PS：在某些浏览，F5只能起到缓存刷新的效果，有可能获取不到真正的源头更新的数据。那么使用ctrl+F5就可以把源头给刷出来。
+
+重置表单
+用户点击重置按钮时，表单会被初始化。虽然这个按钮还得以保留，但目前的Web已经很少去使用了。因为用户已经填写好各种数据，不小心点了
+重置就会全部清空，用户体验极差。
+有两种方法调用reset事件，第一个就是直接type='reset'即可；第二个就是使用fm.reset()方法调用即可。
+//不需要JS代码即可实现
+<input type='reset' value='重置'>
+//使用JS方法实现重置
+addEvent(document, 'click', function () {
+    fm.reset();
+});
+//获取重置按钮
+addEvent(fm, 'reset', function () {
+    //
+});
+
+表单字段
+如果想访问表单元素，可以使用之前章节讲到的DOM方法访问。但使用原生的DOM访问虽然比较通用，但不是很便利。表单处理中，我们建议使用
+HTML DOM，它有自己的elements属性，该属性是表单中所有元素的集合。
+//获取第一个表单字段元素
+fm.elements[0];
+//获取name是user的表单元素
+fm.elements['user'];
+//获取所有表单字段的数量
+fm.elements.length;
+
+如果多个表单字段都使用同一个name，那么就会返回name的NodeList表单列表。
+//获取相同name表单字段列表
+fm.elements['sex'];
+
+PS：我们是通过fm.elements[0]来获取第一个表单字段的，但也可以使用fm[0]直接访问第一个字段。因为fm[0]访问方式是为了向下兼容的，所以，
+我们建议大家使用elements属性来获取。
+
+共有的表单字段属性
+除了<fieldset>元素之外，所有表单字段都拥有相同的一组属性。由于<input>类型可以表示多种表单字段，因此有些属性只适用于某些字段。
+以下罗列出共有的属性：
+disabled:布尔值，表示当前字段是否被禁用
+form:指向当前字段所属表单的指针，只读
+name:当前字段的名称
+readOnly:布尔值，表示当前字段是否只读
+tabIndex:表示当前字段的切换
+type:当前字段的类型
+value:当前字段的值
+
+这些属性其实就是HTML表单里的属性，在XHTML课程已经详细讲解过，这里不一个个赘述，重点看几个常用的。
+//获取和设置value
+fm.elements[0].value;
+//查看当前字段所属表单
+fm.elements[0].form = fm;
+//禁用当前字段
+fm.elements[0].disabled = true;
+//修改字段类型，极不推荐
+fm.elements[0].type = 'checkbox';
+
+除了<fieldset>字段之外，所有表单字段都有type属性，对于<input>元素，这个值等于HTML属性的type值。对于非<input>元素，这个type的属性值如下：
+元素说明:HTML标签，type属性的值
+单选列表:<select>...</select>，select-one
+多选列表:<select multiple>...</select>，select-multiple
+自定义按钮:<button>...</button>，button
+自定义非提交按钮:<button type='button'>...</button>，button
+自定义重置按钮:<button type='reset'>...</button>，reset
+自定义提交按钮:<button type='submit'>...</button>，submit
+
+PS：<input>和<button>元素的type属性是可以动态修改的，而<select>元素的type属性则是只读的。(在不必要的情况下，建议不修改type)
+
+共有的表单字段
+每个表单字段都有两个方法:focus()和blur()
+focus():将焦点定位到表单字段里
+blur():将焦点从表单字段中移出
+//将焦点移入
+fm.elements[0].focus();
+//将焦点移出
+fm.elements[0].blur();
+
+共有的表单字段事件
+表单共有的字段事件有以下三种：
+blur:当字段失去焦点时触发
+change:对于<input>和<textarea>元素，在改变value并失去焦点时触发；对于<select>元素，在改变选型时触发。
+focus:当字段获取焦点时触发
+
+//缓存blur和change再测试一下
+addEvent(textField, 'focus', function () {
+    alert('Lee');
+});
+
+PS：关于blur和change事件的关系，并没有严格的规定。在某些浏览器中，blur事件会先于change事件发生；而在其他浏览器中，则恰好相反。
+
+二、文本框脚本
+在HTML中，有两种方式来表现文本框：一种是单行文本框<input type='text'>，一种是多行文本框<textarea>。虽然<input>在字面上有
+value值，而<textarea>却没有，但都可以通过value获取它们的值。
+var textField = fm.elements[0];
+var areaField = fm.elements[1];
+alert(textField.value + ',' + areaField.value);
+
+PS：使用表单的value是最推荐使用的，它是HTML DOM中的属性，不建议使用标准DOM的方法。也就是说不要使用getAttribute()获取value值。
+原因很简单，对value属性的修改，不一定会反映在DOM中。
+
+除了value值，还有一个属性对应的是defaultValue，可以得到原本的value值，不会因为值的改变而变化。
+//得到最初的value值
+alert(textField.defaultValue);
+
+选择文本
+使用select()方法，可以将文本框里的文本选中，并且将焦点设置到文本框中。
+//选择文本框中的文本
+textField.select();
+
+选择部分文本
+在使用文本框内容的时候，我们有时要直接选定部分文本，这个行为还没有标准。Firefox的解决方法是：setSelectionRange()方法。这个方法接受两个参数：
+索引和长度。
+//选择第一个字符
+textField.setSelectionRange(0,1);
+//焦点移入
+textField.focus();
+
+//选择全部
+textField.setSelectionRange(0, textField.value.length);
+//焦点移入
+textField.focus();
+
+除了IE，其他浏览器都支持这种写法(IE9+支持)，那么IE想要选择部分文本，可以使用IE的范围操作。
+//创建一个文本框对象
+var range = textField.createTextRange();
+//将指针移到起点
+range.collapse(true);
+//移动起点，character表示逐字移动
+range.moveStart('character',0);
+//移动终点，同上
+range.moveEnd('character',1);
+//焦点选定
+range.select();
+
+PS：关于IE范围的详细讲解，我们将在今后的课程中继续讨论。并且W3C也有自己的范围。
+//选择部分文本实现跨浏览器兼容
+function selectText(text, start, end) {
+    if (text.setSelectionRange) {
+        text.setSelectionRange(start, end);
+        text.focus();
+    } else if (text.createTextRange) {
+        var range = text.createTextRange();
+        range.collapse(true);
+        range.moveStart('character', start);
+        //IE 用终点减去起点得到字符数
+        range.moveEnd('character', end - start);
+        range.select();
+    }
+}
+
+使用select事件，可以选中文本框文本后触发
+addEvent(textField, 'select', function () {
+    //IE事件需要传递this才可以这么写
+    alert(this.value);
+});
+
+取得选择的文本
+如果我们想要取得选择的那个文本，局必须使用一些手段。目前没有任何规范解决这个问题。Firefox为文本框提供了两个属性：selectionStart和
+selectionEnd。
+addEvent(textField, 'select', function () {
+    alert(this.value.substring(this.selectionStart, this.selectionEnd));
+});
+
+除了IE，其他浏览器均支持这两个属性(IE9+已支持)。IE不支持，而提供了另一个方案:selection对象，属于document。这个对象保存着用户在整个
+文档范围内选择的文本信息，导致我们需要做浏览器兼容。
+function getSelectText(text) {
+    if (typeof text.selectionStart == 'number') {
+        //非IE
+        return text.value.substring(text.selectionStart, text.selectionEnd);
+    } else if (document.selection) {
+        //IE，获取IE选择的文本
+        return document.selection.createRange().text;
+    }
+}
+
+PS：有一个最大的问题，就是IE在触发select事件的时候，在选择一个字符后立即触发，而其他浏览器是选择想要的字符释放鼠标后才触发。所以，如果使用alert()
+的话，导致跨浏览器不兼容。我们没有办法让浏览器行为保持一致，但可以通过不去使用alert()来解决。
+addEvent(textField, 'select', function () {
+    //alert(getSelectText(this));   //导致用户行为不一致
+    document.getElementById('box').innerHTML = getSelectText(this);
+});
+
+过滤输入
+为了使文本框输入指定的字符，我们必须对输入进的字符进行验证。有一种做法是判断字符是否合法，这是提交后操作的。那么我们还可以在提交前限制某些字符，
+还过滤输入。
+
+addEvent(areaField, 'keypress', function (evt) {
+    var e = evt || window.event;
+    //得到字符编码
+    var charCode = getCharCode(evt);
+    if (!/\d/.test(String.fromChar(charCode)) && charCode > 8) {
+        //条件阻止默认
+        preDef(evt);
+    }
+});
+
+PS：前半段条件判断只有数字才可以输入，导致常规按键，比如光标键、退格键、删除键等无法使用。部分浏览器比如Firefox，需要解放这些键，而非字符触发的编码
+均为0；在Safari3之前的浏览器，也会被阻止，而它对应的字符编码全为8，所以最后就加上charCode>8的判断即可。
+PS：当然，这种过滤还是比较脆弱的，我们还希望能够阻止裁剪、复制、粘贴和中文字符操作才能真正屏蔽掉这些。
+
+如果要阻止裁剪、复制和粘贴，那么我们可以在剪贴板相关的事件上进行处理，JavaScript提供了六组剪贴板相关的事件：
+copy:在发生复制操作时触发
+cut:在发生裁剪操作时触发
+paste:在发生粘贴操作时触发
+beforecopy:在发生复制操作前触发
+beforecut:在发生裁剪操作前触发
+beforepaste:在发生粘贴操作前触发
+
+由于剪贴板没有标准，导致不同的浏览器有不同的解释。Safari、Chrome和Firefox中，凡是before前缀的事件，都需要在特定条件下触发。而IE则会在操作之前
+触发带before前缀的事件。
+如果我们饿想要禁用裁剪、复制、粘贴，那么只要阻止默认行为即可。
+//阻止裁剪
+addEvent(areaField, 'cut', function (evt) {
+    preDef(evt);
+});
+
+//阻止复制
+addEvent(areaField, 'copy', function (evt) {
+    preDef(evt);
+});
+
+//阻止粘贴
+addEvent(areaField, 'paste', function (evt) {
+    preDef(evt);
+});
+
+当我们裁剪和复制的时候，我们可以访问剪贴板里的内容，但问题是Firefox、Opera浏览器不支持访问剪贴板。并且，不同的浏览器也有自己不同的理解。所以，
+这里我们就不再赘述。
+最后一个可能影响到输入的因素就是：输入法。我们知道，中文输入法，它的原理是在输入法面板上先存储文本，按下回车就写入英文文本，按下空格就写入中文
+文本。
+
+有一种解决办法是通过CSS来禁止调出输入法:
+//CSS直接编写
+style = 'ime-mode:disabled';
+//或在JS里设置也可以
+areaField.style.imeMode = 'disabled';
+
+PS：但我们也发现，Chrome浏览器却无法禁止输入法调出。所以，为了解决谷歌浏览器的问题，最好还要使用正则验证已输入的文本。
+//keyup弹起的时候，把非数字都替换成空
+addEvent(areaField, 'keyup', function (evt) {
+    this.value = this.value.replace(/[^\d]/g, '');
+});
+
+自动切换焦点
+为了增加表单字段的易用性，很多字段在满足一定条件时(比如长度)，就会自动切换到下一个字段上继续填写。
+//只能写1个
+<input type='text' name='user1' maxlength='1'>
+//只能写2个
+<input type='text' name='user2' maxlength='2'>
+//只能写3个
+<input type='text' name='value' maxlength='3'>
+
+function tabForward(evt) {
+    var e = evt || window.event;
+    var target = getTarget(evt);
+    //判断当前长度是否和指定长度一致
+    if (target.value.length == target.maxLength) {
+        //遍历所有字段
+        for (var i = 0; i < fm.elements.length; i++) {
+            //找到当前字段
+            if (fm.elements[i] == target) {
+                //就把焦点移入下一个
+                fm.elements[i + 1].focus();
+                //中途返回
+                return;
+            }
+        }
+    }
+}
+
+三、选择框脚本
+选择框是通过<select>和<option>元素创建的，除了通用的一些属性和方法外，HTMLSelectElement类型还提供了如下的属性和方法：
+HTMLSelectElement对象的属性和方法如下：
+add(new, rel):插入新元素，并指定位置
+multiple:布尔值，是否允许多项选择
+options:<option>元素的HTMLCollection集合
+remove(index):移除给定位置的选项
+selectedIndex:基于0的选中项的索引，如果没有选中项，则值为-1
+size:选择框中可见的行数
+
+在DOM中，每个<option>元素都有一个HTMLOptionElement对象，以便访问数据，这个对象有如下一些属性：
+index:当前选项在options集合中的索引
+label:当前选项的标签
+selected:布尔值，表示当前选项是否被选中
+text:选型的文本
+value:选项的值
+
+//HTMLSelectElement
+var city = fm.elements['city'];
+//HTMLOptionsCollection
+alert(city.options);
+//HTMLOptionElement
+alert(city.options[0]);
+//select-one
+alert(city.type);
+
+PS：选择框里的type属性有可能是:select-one，也有可能是select-multiple，这取决于HTML代码中有没有multiple属性。
+//上海 t，获取text值，不推荐的做法
+alert(city.options[0].firstChild.nodeValue);
+//上海 v，获取value值，不推荐的做法
+alert(city.options[0].getAttribute('value'));
+
+//上海 t，获取text值，推荐的做法
+alert(city.options[0].text);
+//上海 v，获取value值，推荐的做法
+alert(city.options[0].value);
+
+PS：操作select时，最好使用HTML DOM，因为所有浏览器兼容的很好。而如果使用标准DOM，会因为不同的浏览器导致不同的结果。
+PS：当选项没有value值的时候，IE会返回空字符串，其他浏览器会返回text值。
+
+选择选项
+对于只能选择一项的选择框，使用selectedIndex属性最为简单。
+addEvent(city, 'change', function() {
+    //得到当前选项的索引，从0开始
+    alert(this.selectedIndex);
+    //得到当前选项的text值
+    alert(this.options[this.selectedIndex].text);
+    //得到当前选项的value值
+    alert(this.options[this.selectedIndex].value);
+});
+PS：如果是多项选择，它始终返回的是第一个选项。
+
+//设置selectedIndex可以定位到某个索引
+city.selectedIndex = 1;
+
+通过options的属性(布尔值)，也可以设置某个索引，设置为true即可。
+//设置第一个索引
+city.options[0].selected = true;
+
+而selected和selectedIndex在用途上最大的区别是，selected返回的是布尔值，所以一般用于判断上；而selectedIndex返回的是数值，一般用于设置和获取。
+addEvent(city, 'change', function () {
+    //判断第三个选型是否被选定
+    if (this.options[2].selected == true) {
+        alert('选择正确!');
+    }
+});
+
+添加选型
+如需要动态的添加选项我们有两种方案:DOM和Option构造函数。
+var option = document.createElement('option');
+option.appendChild(document.createTextNode('北京 t'));
+option.setAttribute('value', '北京 v');
+city.appendChild(option);
+
+
+使用Option构造函数创建：
+var option = new Option('北京 t', '北京 v');
+city.appendChild(option);   //IE出现bug
+
+使用add()方法来添加选项：
+var option = new Option('北京 t', '北京 v');
+city.add(option, 0);    //0, 表示添加到第一位
+
+PS：在DOM规定，add()中两个参数是必须的，如果不确定索引，那么第二个参数设置null即可，即默认移入最后一个选项。但IE中规定第二个参数是可选的，
+所以设置null表示放入不存在的位置，导致失踪，为了兼容性，我们传递undefined即可兼容。
+city.add(option, null); //IE不显示了
+city.add(option, undefined);    //兼容了
+
+移除选项
+有三种方式可以移除某一个选项：DOM移除、remove()方法移除和null移除。
+//DOM移除
+city.removeChild(city.options[0]);
+//remove()移除，推荐
+city.remove(0);
+//null移除
+city.options[0] = null;
+
+PS：当第一项移除后，下面的项，往上顶，所以不停的移除第一项，即可全部移除。
+
+移动选项
+如果有两个选择框，把第一个选择框里的第一项移到第二个选择框里，并且第一个选择框里的第一项被移除。
+//第一个选择框
+var city = fm.elements['city'];
+//第二个选择框
+var info = fm.elements['info'];
+//移动，被自我删除
+info.appendChild(city.options[0]);
+
+排列选型
+选择框提供了一个index属性，可以得到当前选型的索引值，和selectedIndex的区别是，一个是选择框对象的调用，一个是选项对象的调用。
+var option1 = city.options[1];
+//往下移动一位
+city.insertBefore(option1, city.options[option1.index - 1]);
+
+单选按钮
+通过checked属性来获取单选按钮的值。
+//循环单选按钮
+for (var i = 0; i < fm.sex.length; i++) {
+    //遍历每一个找出选中的那个
+    if (fm.sex[i].checked == true) {
+        //得到值
+        alert(fm.sex[i].value);
+    }
+}
+
+PS：除了checked属性之外，单选按钮还有一个defaultChecked按钮，它获取的是原本的checked按钮对象，而不会因为checked的改变而改变。
+if (fm.sex[i].defaultChecked == true) {
+    alert(fm.sex[i].value);
+}
+
+复选按钮
+通过checked属性来获取复选按钮的值。复选按钮也具有defaultChecked属性。
+var love = '';
+for (var i = 0; i < fm.love.length; i++) {
+    if (fm.love[i].checked == true) {
+        love += fm.love[i].value;
+    }
+}
+alert(love);
+-->
