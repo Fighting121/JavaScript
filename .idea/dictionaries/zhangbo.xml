@@ -4,12 +4,17 @@
       <w>aaaaa</w>
       <w>addstring</w>
       <w>baidu</w>
+      <w>bookinfo</w>
       <w>boxarr</w>
       <w>browserdetect</w>
       <w>instrucetion</w>
+      <w>mozilla</w>
+      <w>msxml</w>
       <w>ondragdrop</w>
       <w>onmove</w>
+      <w>parsererror</w>
       <w>valuidation</w>
+      <w>xmldom</w>
     </words>
   </dictionary>
 </component>

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09a13e0e-64d5-48b4-9435-996cc8e1a950" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/zhangbo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/zhangbo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/第三十二章/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/第三十二章/demo.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -16,10 +18,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/第三十二章/demo.html">
+        <entry file="file://$PROJECT_DIR$/第三十章/XML-1/demo.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="466">
-              <caret line="140" column="18" selection-start-line="140" selection-start-column="18" selection-end-line="140" selection-end-column="18" />
+              <caret line="249" column="74" selection-start-line="249" selection-start-column="74" selection-end-line="249" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -45,10 +47,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/第一章/demo.html" />
-        <option value="$PROJECT_DIR$/第四章/demo.js" />
-        <option value="$PROJECT_DIR$/第七章/demo.js" />
-        <option value="$PROJECT_DIR$/第五章/demo.js" />
         <option value="$PROJECT_DIR$/第七章/demo.html" />
         <option value="$PROJECT_DIR$/第五章/demo.html" />
         <option value="$PROJECT_DIR$/第四章/demo.html" />
@@ -85,7 +83,6 @@
         <option value="$PROJECT_DIR$/第二十二章/DOM元素尺寸和位置-上/demo.js" />
         <option value="$PROJECT_DIR$/第二十二章/DOM元素尺寸和位置-上/demo.html" />
         <option value="$PROJECT_DIR$/第二十三章/demo.js" />
-        <option value="$PROJECT_DIR$/第三十二章/demo.js" />
         <option value="$PROJECT_DIR$/第二十三章/demo.html" />
         <option value="$PROJECT_DIR$/第二十四章/demo.html" />
         <option value="$PROJECT_DIR$/第二十四章/demo.js" />
@@ -96,6 +93,11 @@
         <option value="$PROJECT_DIR$/第二十七章/表单处理-1/demo.js" />
         <option value="$PROJECT_DIR$/第二十七章/表单处理-1/demo.html" />
         <option value="$PROJECT_DIR$/第三十二章/demo.html" />
+        <option value="$PROJECT_DIR$/第三十二章/demo.js" />
+        <option value="$PROJECT_DIR$/第二十九章/Cookie与存储-上/demo.html" />
+        <option value="$PROJECT_DIR$/第二十九章/Cookie与存储-上/demo.js" />
+        <option value="$PROJECT_DIR$/第三十章/XML-1/demo.js" />
+        <option value="$PROJECT_DIR$/第三十章/XML-1/demo.html" />
       </list>
     </option>
   </component>
@@ -105,7 +107,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="y" value="34" />
     <option name="width" value="1258" />
     <option name="height" value="686" />
@@ -141,7 +143,13 @@
             <path>
               <item name="JavaScript" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="第三十二章" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="第三十章" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="JavaScript" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="第三十章" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="XML-1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -207,12 +215,13 @@
       <workItem from="1546567071934" duration="24167000" />
       <workItem from="1546832586477" duration="29242000" />
       <workItem from="1546917773476" duration="158910000" />
-      <workItem from="1547781667063" duration="19572000" />
+      <workItem from="1547781667063" duration="35399000" />
+      <workItem from="1547890234393" duration="4471000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310102000" />
+    <option name="totallyTimeSpent" value="330400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="34" width="1258" height="686" extended-state="0" />
@@ -241,30 +250,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/第九章/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="104" column="14" selection-start-line="104" selection-start-column="14" selection-end-line="104" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="873" column="18" selection-start-line="873" selection-start-column="18" selection-end-line="873" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第十一章/Function类型-上/demo.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/第十一章/Function类型-上/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/第十章/正则表达式-1/demo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -448,9 +433,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/第三十二章/demo.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/第二十三章/demo.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -523,10 +505,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/第三十二章/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/第三十二章/demo.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3200">
+          <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第三十章/XML-1/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十九章/Cookie与存储-上/demo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第二十九章/Cookie与存储-上/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="170" selection-start-line="170" selection-end-line="170" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/第三十章/XML-1/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
-          <caret line="140" column="18" selection-start-line="140" selection-start-column="18" selection-end-line="140" selection-end-column="18" />
+          <caret line="249" column="74" selection-start-line="249" selection-start-column="74" selection-end-line="249" selection-end-column="74" />
         </state>
       </provider>
     </entry>
